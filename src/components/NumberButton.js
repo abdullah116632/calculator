@@ -1,9 +1,9 @@
-
+import { ACTIONS } from "../App";
 
 const NumberButton = ({number, dispatch}) => {
   return (
     
-      <button type="button">{number}</button>
+      <button type="button" onClick={() => dispatch({type: ACTIONS.ADD_DEGIT, payload: {number}})}>{number}</button>
     
   );
 }
