@@ -19,51 +19,33 @@ const initialState = {
   result: 0,
 };
 
-// const operand = ["+", "-", "*", "/"];
-
 function App() {
   const reducer = (state, { type, payload }) => {
     switch (type) {
       case ACTIONS.ADD_DEGIT:
-
-        // if (state.currentOperand !== null  && state.previousOperand !== null) {
-        //   return {
-        //     ...state,
-        //     inputScreen: `${state.inputScreen || ""}${payload.number}`,
-
-        //   }
-        // }
-
-        if(state.previousOperand == null){
+        if (state.previousOperand == null) {
           return {
             ...state,
-          inputScreen: `${state.inputScreen || ""}${payload.number}`,
-          currentOperand: `${state.currentOperand || ""}${payload.number}`,
-          }
+            inputScreen: `${state.inputScreen || ""}${payload.number}`,
+            currentOperand: `${state.currentOperand || ""}${payload.number}`,
+          };
         }
 
-        if(state.currentOperand == null){
-          state.currentOperand = `${state.currentOperand || ""}${payload.number}`
+        if (state.currentOperand == null) {
+          state.currentOperand = `${state.currentOperand || ""}${
+            payload.number
+          }`;
         }
 
         return {
           ...state,
           inputScreen: `${state.inputScreen || ""}${payload.number}`,
-          
+
           previousOperand: evaluate(state),
-          currentOperand: null
-          
-          
-          // result: evaluate(state)
+          currentOperand: null,
         };
 
       case ACTIONS.ADD_OPERAND:
-
-        // if(state.currentOperand !== null && state.previousOperand !== null){
-        //   state.result = evaluate(state)
-        // }
-
-
         if (!state.inputScreen) {
           return state;
         }
@@ -79,29 +61,29 @@ function App() {
           return state;
         }
 
-        if(state.previousOperand == null) {
+        if (state.previousOperand == null) {
           return {
             ...state,
             inputScreen: `${state.inputScreen}${payload.operand}`,
             previousOperand: state.currentOperand,
             operation: payload.operand,
-            currentOperand: null
-          }
+            currentOperand: null,
+          };
         }
-
 
         return {
           ...state,
           inputScreen: `${state.inputScreen}${payload.operand}`,
-          // previousOperand: state.currentOperand,
-          // currentOperand: null,
           operation: payload.operand,
         };
 
       case ACTIONS.RESET:
         return {
           ...state,
-          inputScreen: null,
+          inputScreen: "",
+          currentOperand: null,
+          previousOperand: null,
+          result: 0,
         };
 
       case ACTIONS.DELETE:
@@ -117,24 +99,11 @@ function App() {
   };
 
   const evaluate = ({ currentOperand, previousOperand, operation, result }) => {
-
-    // if(!currentOperand){
-    //   return currentOperand
-    // }
-
-    // if(!previousOperand){
-    //   return previousOperand
-    // }
-
     const current = parseFloat(currentOperand);
     const prev = parseFloat(previousOperand);
 
-    console.log(" function curr",currentOperand)
-    console.log("function prev" ,previousOperand)
-
-    // if (isNaN(current) || isNaN(prev)) {
-    //   return "";
-    // }
+    // console.log(" function curr",currentOperand)
+    // console.log("function prev" ,previousOperand)
 
     switch (operation) {
       case "+":
@@ -149,17 +118,19 @@ function App() {
       case "/":
         result = prev / current;
         break;
+      default: 
+       result = 0
     }
 
-    return result.toString()
+
+    return result.toString();
   };
 
   const [{ inputScreen, result, currentOperand, previousOperand }, dispatch] =
     useReducer(reducer, initialState);
 
-  // console.log(inputScreen);
-  console.log("current", currentOperand)
-  console.log("prev", previousOperand)
+  // console.log("current", currentOperand)
+  // console.log("prev", previousOperand)
 
   return (
     <div className="App">
