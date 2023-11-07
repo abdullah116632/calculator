@@ -50,11 +50,13 @@ body {
 .result{
     font-size: 3rem;
     font-weight: 400;
+    height: 4rem;
 }
 
 .operationField {
     font-size: 2.5rem;
     font-weight: 400;
+    height: 3.7rem;
 }
 
 .board {
