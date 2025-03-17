@@ -1,11 +1,14 @@
-import { ACTIONS } from "../App";
+import { ACTIONS } from "../actions/action";
 
-const NumberButton = ({number, dispatch}) => {
+const NumberButton = ({ number, dispatch }) => {
   return (
-    
-      <button type="button" onClick={() => dispatch({type: ACTIONS.ADD_DEGIT, payload: {number}})}>{number}</button>
-    
+    <button
+      type="button"
+      onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: { number } })}
+    >
+      {number}
+    </button>
   );
-}
+};
 
 export default NumberButton;

@@ -1,11 +1,16 @@
-import { ACTIONS } from "../App";
+import { ACTIONS } from "../actions/action";
 
-const OperationButton = ({operand, dispatch}) => {
+const OperationButton = ({ operand, dispatch }) => {
   return (
-    
-      <button type="button" onClick={() => dispatch({type:ACTIONS.ADD_OPERAND, payload:{operand} })}>{operand}</button>
-    
+    <button
+      type="button"
+      onClick={() =>
+        dispatch({ type: ACTIONS.ADD_OPERAND, payload: { operand } })
+      }
+    >
+      {operand}
+    </button>
   );
-}
+};
 
 export default OperationButton;
